@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <style>
+            .queryWrapper {
+                border: black 2px solid;
+                border-radius: 8px;
+                padding: 5px;
+                width: 400px;
+                display: grid;
+                grid-template-columns: 80px 90px 100px 40px 90px;
+                margin: 0 auto;
+            }
+            .dataWrapper {
+                border-radius: 8px;
+                background-color: silver;
+                padding: 5px;
+                width: 400px;
+                display: grid;
+                grid-template-columns: 200px 200px;
+                margin: 0 auto;
+            }
+            .dataCellLabel {
+                text-align: center;
+                padding: 5px;
+                font-weight: 700;
+            }
+            .dataCell {
+                text-align: center;
+                padding: 5px;
+            }
+            .footer {
+                width: 400px;
+                margin: 0 auto;
+                text-align: center;
+            }
+        </style>
+    </head>
+    <body>
+        <h1 style='text-align:center;' id='title'>Star Wars Data Checker</h1>
+        <div class='queryWrapper'>
+            <div>Query Type:</div>
+            <div>
+                <select id='queryType'>
+                    <option value='people'>People</option>
+                    <option value='planets'>Planets</option>
+                    <option value='starships'>Starships</option>
+                </select>
+            </div>
+            <div>Item Number:</div>
+            <div>
+                <input style='width:25px' id='itemID' />
+            </div>
+            <div>
+                <button id='fetchButton'onclick="getItem(
+                document.querySelector('#queryType').value,
+                document.querySelector('#itemID').value
+                )">submit</button>
+            </div>
+        </div>
+
+        <br /><br />
+
+        <div id='ResponseData' class='dataWrapper'>
+            <div class='dataCellLabel' id='dataLabel1'></div>
+            <div class='dataCell' id='dataValue1'></div>
+            <div class='dataCellLabel' id='dataLabel2'></div>
+            <div class='dataCell' id='dataValue2'></div>
+        </div>
+
+        <br /><br />
+        
+        <div class='footer'>
+            <hr />
+            <a href='https://swapi.dev/api/'' target='_new'>Data courtesy of Star War API</a>
+        </div>
+
+        <script charset='utf-8'>
+            function getItem(queryType,itemID) {
+                console.log(queryType)
+                console.log(itemID)
+                fetch(`https://swapi.dev/api/${queryType}/${itemID}`)
+                .then(function (response) {
+                    return response.json()
+                })
+                .then(function(json){
+                    console.log(json)
+                    updateInfo(json)
+                })
+                .catch(function (err) {
+                    console.warn(err)
+                })
+            
+                function updateInfo(data){
+                    var label1 = document.querySelector('#dataLabel1')
+                    var label2 = document.querySelector('#dataLabel2')
+                
+                    if(queryType==='planets'){
+                    console.log(data.population,data.name)
+                    }
+                    else if(queryType === 'peoples'){
+                        console.log(data.name,data.age)
+                    }
+                     else(queryType === 'starships')
+                       console.log(data.name,data.model)
+
+                    }
+                     label1.textContent="Name: "
+                     value1.textContent = data.name
+                     label2.textContent=": "
+                     value2.textContent = data.name
+   
+        </script>
+    </body>
+</html>
