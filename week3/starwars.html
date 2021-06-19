@@ -54,8 +54,7 @@
             <div>
                 <button id='fetchButton'onclick="getItem(
                 document.querySelector('#queryType').value,
-                document.querySelector('#itemID').value
-                )">submit</button>
+                document.querySelector('#itemID').value)">submit</button>
             </div>
         </div>
 
@@ -94,22 +93,31 @@
                 function updateInfo(data){
                     var label1 = document.querySelector('#dataLabel1')
                     var label2 = document.querySelector('#dataLabel2')
+                    var label3 = document.querySelector('#dataLabel3')
                 
+                console.log(data)
                     if(queryType==='planets'){
                     console.log(data.population,data.name)
                     }
-                    else if(queryType === 'peoples'){
+                    else if(queryType === 'people'){
                         console.log(data.name,data.age)
                     }
-                     else(queryType === 'starships')
-                       console.log(data.name,data.model)
-
+                    else if(queryType === 'starships'){
+                        console.log(data.name,data.model)
                     }
+                
+                    var label1=document.getElementById("dataLabel1")
+                    var value1 =document.getElementById("dataValue1")
                      label1.textContent="Name: "
-                     value1.textContent = data.name
-                     label2.textContent=": "
-                     value2.textContent = data.name
-   
-        </script>
-    </body>
+                     var label2 =document.getElementById("dataLabel2")
+                     var value2 =document.getElementById("dataValue2")
+                      value1.textContent = data.name
+                      label2.textContent= "eye_color:"
+                      value2.textContent = data.eye_color
+                   
+                }
+            }
+   </script>
+                </body>
 </html>
+   
